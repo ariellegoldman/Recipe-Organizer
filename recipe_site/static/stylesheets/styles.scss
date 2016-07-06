@@ -1,0 +1,138 @@
+@import "skeleton/skeleton";
+@import "font-awesome/font-awesome";
+@import "fonts";
+@import "colors";
+@import "navbar";
+@import "footer";
+
+
+html {
+  height: 100%;
+  font-size: 1.125em;
+}
+
+// Font calculations based on: http://type-scale.com/?size=18&scale=1.414&text=A%20Visual%20Type%20Scale&webfont=Libre+Baskerville&font-family=Alegreya%20Sans&font-weight=400&font-family-headers=&font-weight-headers=inherit&background-color=white&font-color=%23333
+
+body {
+  line-height: 1.45;
+  font-weight: 400;
+  font-family: $sans-serif;
+  color: $diamm-black;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+.full-width {
+  margin-bottom: 1rem;
+}
+
+li.image-source-list {
+  list-style-type: none;
+}
+
+a {
+  color: $diamm-lt-blue;
+  text-decoration: none;
+  box-sizing: border-box;
+  &:hover {
+    color: $diamm-dk-blue;
+    border-bottom: 1px solid $diamm-dk-blue;
+  }
+}
+
+p {
+  font-family: $serif;
+  margin-bottom: 1.3em;
+  padding-top: 0.5em;
+  padding-left: 0.3em;
+}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 1.602em;
+}
+
+h2 {font-size: 1.424em;}
+
+h3 {font-size: 1.266em;}
+
+h4 {font-size: 1.125em;}
+
+small, .font_small {font-size: 0.889em;}
+
+.container {
+  flex: 1 0 auto;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+form.login {
+  float: left;
+  position: relative;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 22rem;
+  height: auto;
+  vertical-align: baseline;
+  line-height: 24px;
+  font-weight: bold;
+
+  text-decoration: none;
+
+
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  h1 {
+    position: relative;
+    color: $diamm-black;
+    margin-top: 0.8rem;
+    margin-left: 0.8rem;
+    font-weight: 400;
+    padding-bottom: 1rem;
+  }
+  input {
+    width: 20rem;
+    display: block;
+    border: none;
+    margin-bottom: 2.2rem;
+    border-bottom: 1px solid $diamm-med-grey;
+    height: 2rem;
+    background-color: transparent;
+    -webkit-appearance: none;
+
+    &:focus {
+      color: $diamm-black;
+      border-color: transparent;
+      border-bottom: 1px solid $diamm-med-grey;
+    }
+  }
+
+  input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: $diamm-white !important;
+  }
+  button {
+    margin-bottom: 0.4rem;
+  }
+  a {
+    font-size: 0.8rem;
+  }
+}
+

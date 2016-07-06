@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Recipe Organizer :: Home</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{{ static('stylesheets/styles.css') }}" />
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav role="navigation" class="navbar">
+        <ul class="navbar-list pull-right">
+            {% if user.is_authenticated() %}
+                <li class="navbar-item">
+                    <form action="{{ url('logout') }}" method="post"> {% csrf_token %}
+                        <input type="submit" value="Logout" />
+                    </form>
+                </li>
+                <li class="navbar-item">User: {{ user.username }}</li>
+                {% else %}
+                <li class="navbar-item"><a href="{{ url('login') }}">Login</a></li>
+            {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <div class="full-width">
+        {% block fullwidth %}
+        {% endblock %}
+    </div>
+
+    <div class="container site-content">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer" style="text-align: center;">
+
+    </footer>
+
+    <script src="{{ static('javascripts/dist/bundle.js') }}" type="application/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.jinja2" %}
+
+{% block body %}
+
+    <h1>{{ content.name }}</h1>
+    <h2>Ingredients</h2>
+        <ul>
+        {% for ingredient in content.ingredients %}
+            <li>{{ ingredient.name }}</li>
+        {% endfor %}
+        </ul>
+    <h2>Directions</h2>
+    {{ content.directions }}
+    <h3> Dietary Categories</h3>
+    <ul>
+    {% for restriction in content.dietary_category %}
+        <li>{{ restriction.name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

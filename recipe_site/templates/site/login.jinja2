@@ -1,0 +1,14 @@
+{% extends "base.jinja2" %}
+
+{% block body %}
+
+    <form class="login" action="{{ url('login') }}" method="post"> {% csrf_token %}
+        <h1>Log In</h1>
+
+        <input id="username" name="username" placeholder="Username">
+        <input id="password" name="password" type="password" placeholder="Password">
+
+        <button id="login" type="submit">Next</button>
+    </form>
+
+{% endblock %}

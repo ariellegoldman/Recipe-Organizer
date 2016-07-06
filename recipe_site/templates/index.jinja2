@@ -1,0 +1,23 @@
+{% extends "base.jinja2" %}
+
+{% block body %}
+    <h1>Home Page</h1>
+
+    <form action="{{ url('recipe-list') }}" method="post">{% csrf_token %}
+    <h2>Ingredient List</h2>
+
+        {% for ingredient in content.ingredients %}
+           <input type="checkbox" name=ingredient value={{ ingredient.name }}> {{ ingredient.name }}<br>
+        {% endfor %}
+
+
+    <h3>Dietary Restrictions</h3>
+
+        {% for restriction in content.restrictions %}
+           <input type="checkbox" name=restriction value={{ restriction.name }}> {{ restriction.name }}<br>
+        {% endfor %}
+
+    <button type="submit">Search</button>
+    </form>
+
+{% endblock %}

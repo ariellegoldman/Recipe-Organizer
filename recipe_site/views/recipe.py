@@ -20,6 +20,12 @@ class RecipeList(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = Recipe.objects.all()
         ingredient = self.request.query_params.get('ingredient', None)
-        if ingredient is not None:
+        restriction = self.request.query_params.get('restriction', None)
+        if ingredient is not None and restriction is not None:
+            queryset = queryset.filter(ingredients__name=ingredient, dietary_category__name=restriction)
+        elif ingredient is not None:
             queryset = queryset.filter(ingredients__name=ingredient)
+        elif restriction is not None:
+            queryset = queryset.filter(dietary_category__name=restriction)
+
         return queryset

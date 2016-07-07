@@ -2,9 +2,13 @@
 
 {% block body %}
     <h1>Results</h1>
-    <ul>
-        {% for recipe in content.results %}
-            <li><a href="{{ recipe.url }}">{{ recipe.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% if content.results %}
+        <ul>
+            {% for recipe in content.results %}
+                <li><a href="{{ recipe.url }}">{{ recipe.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        No results matched your search.
+    {% endif %}
 {% endblock %}

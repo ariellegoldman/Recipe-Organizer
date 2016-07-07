@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Home Page</h1>
 
-    <form action="{{ url('recipe-list') }}" method="post">{% csrf_token %}
+    <form action="{{ url('recipe-list') }}" method="get">
     <h2>Ingredient List</h2>
 
         {% for ingredient in content.ingredients %}

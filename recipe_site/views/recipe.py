@@ -21,11 +21,12 @@ class RecipeList(generics.ListCreateAPIView):
         queryset = Recipe.objects.all()
         ingredient = self.request.query_params.get('ingredient', None)
         restriction = self.request.query_params.get('restriction', None)
+
         if ingredient is not None and restriction is not None:
             queryset = queryset.filter(ingredients__name=ingredient, dietary_category__name=restriction)
         elif ingredient is not None:
             queryset = queryset.filter(ingredients__name=ingredient)
         elif restriction is not None:
-            queryset = queryset.filter(dietary_category__name=restriction)
+            queryset = queryset.filter(dietary_category__name__icontains=restriction)
 
         return queryset

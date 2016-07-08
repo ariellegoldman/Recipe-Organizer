@@ -2929,3 +2929,6 @@ form.login {
     margin-bottom: 0.4rem; }
   form.login a {
     font-size: 0.8rem; }
+
+label {
+  display: inline-block; }

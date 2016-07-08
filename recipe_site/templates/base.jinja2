@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %}
-        <title>Recipe Organizer :: Home</title>
-    {% endblock %}
     <link rel="stylesheet" href="{{ static('stylesheets/styles.css') }}" />
     {% block head %}
     {% endblock %}
@@ -19,6 +16,7 @@
                         <input type="submit" value="Logout" />
                     </form>
                 </li>
+
                 <li class="navbar-item">User: {{ user.username }}</li>
                 {% else %}
                 <li class="navbar-item"><a href="{{ url('login') }}">Login</a></li>
@@ -27,10 +25,15 @@
         </nav>
     </header>
 
-    <div class="full-width">
-        {% block fullwidth %}
-        {% endblock %}
-    </div>
+
+    {% if user.is_authenticated() and user.favourite %}
+        <h3>Favourites</h3>
+        <ul>
+        {% for recipe in user.favourite %}
+            <li>{{ recipe.name }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
     <div class="container site-content">
         {% block body %}

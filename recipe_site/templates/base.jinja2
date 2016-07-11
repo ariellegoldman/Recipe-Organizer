@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% block title %}
+        <title>Recipe Organizer :: Home</title>
+    {% endblock %}
     <link rel="stylesheet" href="{{ static('stylesheets/styles.css') }}" />
     {% block head %}
     {% endblock %}
 </head>
 <body>
     <header>
-        <nav role="navigation" class="navbar">
+        <nav class="navbar">
         <ul class="navbar-list pull-right">
             {% if user.is_authenticated() %}
                 <li class="navbar-item">

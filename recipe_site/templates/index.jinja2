@@ -20,15 +20,15 @@
     <h2>Ingredient List</h2>
 
         {% for ingredient in content.ingredients %}
-           <input type="checkbox" id=ingredient name=ingredient value={{ ingredient.name }}>
-            <label for="ingredient">{{ ingredient.name }}</label><br>
+           <input type="checkbox" id="{{ ingredient.name }}" name="ingredient" value={{ ingredient.name }}>
+            <label for="{{ ingredient.name }}">{{ ingredient.name }}</label><br>
         {% endfor %}
 
     <h3>Dietary Restrictions</h3>
 
         {% for restriction in content.restrictions %}
-           <input type="checkbox" id=restriction name=restriction value={{ restriction.name }}>
-            <label for="restriction">{{ restriction.name }}</label><br>
+           <input type="checkbox" id="{{ restriction.name|replace(" ", "_") }}" name="restriction" value={{ restriction.name|replace(" ", "_") }}>
+            <label for="{{ restriction.name|replace(" ", "_") }}">{{ restriction.name }}</label><br>
         {% endfor %}
 
     <button type="submit">Search</button>

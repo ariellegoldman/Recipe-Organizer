@@ -5,3 +5,4 @@ __pycache__
 recipe_site/views/__pycache__
 recipe_site/admin/__pycache__
 recipe_site/models/__pycache__
+recipe_site/processor/__pycache__

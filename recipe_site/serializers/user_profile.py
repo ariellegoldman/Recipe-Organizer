@@ -6,13 +6,13 @@ from recipe_site.models.recipe import Recipe
 class RecipeUserProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Recipe
-        fields = 'name',
+        fields = 'name', 'url'
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     favourite = RecipeUserProfileSerializer(many=True)
 
     class Meta:
         model = UserProfile
-        fields = ('id', 'favourite')
+        fields = ('id','favourite')
 

@@ -15,21 +15,22 @@ class HomeView(views.APIView):
     def get(self, request, *args, **kwargs):
         ingredients = Ingredient.objects.order_by('name')
         restrictions = DietaryCategory.objects.order_by('name')
-        favourites = None
-        if request.user.is_authenticated():
-            favourites = UserProfile.objects.get(user=User.objects.filter(username=request.user.username))
+        user_favourite = UserProfile.objects.order_by('id')
+        user = User.objects.filter(username=request.user.username)
 
         ingredients_data = IngredientSerializer(ingredients,
                                             context={'request': request},
                                             many=True).data
+
         restrictions_data = DietaryCategorySerializer(restrictions,
                                                       context={'request': request},
                                                       many=True).data
 
-        favourites_data = UserProfileSerializer(favourites).data
+        user_favourite_data = UserProfileSerializer(user_favourite.filter(user=user),
+                                               context={'request': request}, many=True).data
 
         return Response({
             'ingredients': ingredients_data,
             'restrictions': restrictions_data,
-            'favourites': favourites_data,
+            'user_favourite': user_favourite_data,
         })

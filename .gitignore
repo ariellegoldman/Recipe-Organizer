@@ -1,0 +1,7 @@
+recipe_site/recipe_site_data/__pycache__
+recipe_site/recipe_site_data/migrations/__pycache__
+recipe_site/serializers/__pycache__
+__pycache__
+recipe_site/views/__pycache__
+recipe_site/admin/__pycache__
+recipe_site/models/__pycache__

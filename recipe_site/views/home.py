@@ -17,8 +17,7 @@ class HomeView(views.APIView):
         restrictions = DietaryCategory.objects.order_by('name')
         favourites = None
         if request.user.is_authenticated():
-            favourites = UserProfileSerializer(UserProfile.objects.get(user=User.objects.filter(username=request.user.username))).data
-
+            favourites = UserProfile.objects.get(user=User.objects.filter(username=request.user.username))
 
         ingredients_data = IngredientSerializer(ingredients,
                                             context={'request': request},
@@ -27,8 +26,10 @@ class HomeView(views.APIView):
                                                       context={'request': request},
                                                       many=True).data
 
+        favourites_data = UserProfileSerializer(favourites).data
+
         return Response({
             'ingredients': ingredients_data,
             'restrictions': restrictions_data,
-            'favourites': favourites,
+            'favourites': favourites_data,
         })

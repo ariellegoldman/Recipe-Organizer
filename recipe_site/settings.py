@@ -74,6 +74,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "recipe_site.processor.user_profile.user_profile_context",
             ]
         }
     },
@@ -87,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'recipe_site.processor.user_profile.user_profile_context',
             ],
         },
     },

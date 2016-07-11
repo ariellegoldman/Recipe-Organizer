@@ -6,7 +6,7 @@ from recipe_site.models.recipe import Recipe
 class RecipeUserProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Recipe
-        fields = 'name', 'url'
+        fields = ('name', 'url', 'id')
 
 
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,5 +14,5 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('id','favourite')
+        fields = ('id', 'favourite')
 

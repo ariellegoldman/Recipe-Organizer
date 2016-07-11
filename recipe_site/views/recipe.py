@@ -1,7 +1,13 @@
 from django.db.models import Q
+from django.db import IntegrityError
+from django.http import HttpResponseRedirect
 from rest_framework import generics
 from rest_framework import renderers
+from rest_framework import status
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 from recipe_site.models.recipe import Recipe
+from recipe_site.models.user_profile import UserProfile
 from recipe_site.renderers.html_renderer import HTMLRenderer
 from recipe_site.serializers.recipe import RecipeSerializer
 
@@ -11,6 +17,26 @@ class RecipeDetail(generics.RetrieveAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     renderer_classes = (HTMLRenderer, renderers.JSONRenderer)
+
+    def post(self, request, *args, **kwargs):
+
+        favourite = request.POST['favourite']
+        profile_id = request.POST['current_user']
+        if favourite:
+            print(favourite)
+            user_favourite = UserProfile.objects.get(id=profile_id)
+            print(user_favourite.favourite.all())
+
+            #check if it's already a favourite
+            try:
+                user_favourite.favourite.add(favourite)
+            except IntegrityError:
+                return Response("Already a Favourite", status=status.HTTP_401_UNAUTHORIZED)
+
+            #user_favourite.favourite.save()
+            return HttpResponseRedirect(reverse("home"))
+
+        return HttpResponseRedirect(reverse("home"))
 
 
 class RecipeList(generics.ListCreateAPIView):

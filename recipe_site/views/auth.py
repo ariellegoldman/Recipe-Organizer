@@ -27,7 +27,6 @@ class SessionAuth(views.APIView):
 
         login(request, user)
         if isinstance(request.accepted_renderer, HTMLRenderer):
-
             return HttpResponseRedirect("/")
         else:
             return Response({'Success': 'Success'})

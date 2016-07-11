@@ -1,13 +1,16 @@
 from rest_framework import views
+from rest_framework import renderers
 from rest_framework.response import Response
 from recipe_site.models.ingredient import Ingredient
 from recipe_site.serializers.ingredient import IngredientSerializer
 from recipe_site.models.dietary_category import DietaryCategory
 from recipe_site.serializers.dietary_category import DietaryCategorySerializer
+from recipe_site.renderers.html_renderer import HTMLRenderer
 
 
 class HomeView(views.APIView):
     template_name = "index.jinja2"
+    renderer_classes = (HTMLRenderer, renderers.JSONRenderer)
 
     def get(self, request, *args, **kwargs):
         ingredients = Ingredient.objects.order_by('name')

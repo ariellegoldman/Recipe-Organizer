@@ -27,9 +27,10 @@ class SessionAuth(views.APIView):
 
         login(request, user)
         if isinstance(request.accepted_renderer, HTMLRenderer):
+
             return HttpResponseRedirect("/")
         else:
-            return Response({})
+            return Response({'Success': 'Success'})
 
     def get(self, request, *args, **kwargs):
         return Response({})
@@ -46,6 +47,6 @@ class SessionClose(views.APIView):
 
             if isinstance(request.accepted_renderer, HTMLRenderer):
                 return HttpResponseRedirect(reverse("home"))
-            return Response({})
+            return Response({'Success': 'Success'})
         else:
             return Response({}, status=status.HTTP_403_FORBIDDEN)

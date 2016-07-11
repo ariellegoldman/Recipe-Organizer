@@ -17,4 +17,21 @@
         <li>{{ restriction.name }}</li>
     {% endfor %}
     </ul>
+
+    {% if user.is_authenticated() %}
+        <form action=" " method="post">{% csrf_token %}
+        <input type="submit" name="favourite" value="{{ content.id }}">Save as favourite</input>
+
+            {% for user in users %}
+                   <input id="current_user" name="current_user" value="{{ user.id }}" type="hidden">
+                {% for favourite in user.favourite %}
+                    {% if favourite.id == content.id %}
+
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+        </form>
+    {% endif %}
+    <a href="{{ url('home') }}">Home</a>
 {% endblock %}

@@ -3,9 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from rest_framework import generics
 from rest_framework import renderers
-from rest_framework import status
 from rest_framework.reverse import reverse
-from rest_framework.response import Response
 from recipe_site.models.recipe import Recipe
 from recipe_site.models.user_profile import UserProfile
 from recipe_site.renderers.html_renderer import HTMLRenderer
@@ -22,6 +20,7 @@ class RecipeDetail(generics.RetrieveAPIView):
 
         favourite = request.POST['favourite']
         profile_id = request.POST['current_user']
+        current_url = request.POST['from']
         if favourite:
             print(favourite)
             user_favourite = UserProfile.objects.get(id=profile_id)
@@ -31,12 +30,11 @@ class RecipeDetail(generics.RetrieveAPIView):
             try:
                 user_favourite.favourite.add(favourite)
             except IntegrityError:
-                return Response("Already a Favourite", status=status.HTTP_401_UNAUTHORIZED)
+                return HttpResponseRedirect(reverse("home"))
 
-            #user_favourite.favourite.save()
             return HttpResponseRedirect(reverse("home"))
 
-        return HttpResponseRedirect(reverse("home"))
+        return HttpResponseRedirect(current_url)
 
 
 class RecipeList(generics.ListCreateAPIView):

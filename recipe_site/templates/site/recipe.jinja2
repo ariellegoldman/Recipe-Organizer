@@ -20,17 +20,16 @@
 
     {% if user.is_authenticated() %}
         <form action=" " method="post">{% csrf_token %}
-        <input type="submit" name="favourite" value="{{ content.id }}">Save as favourite</input>
+
+            <input id="from" name="from" value="{{ request.path|urlencode }}" type="hidden" readonly>
+
+            <input type="hidden" name="favourite" value="{{ content.id }}">
 
             {% for user in users %}
                    <input id="current_user" name="current_user" value="{{ user.id }}" type="hidden">
-                {% for favourite in user.favourite %}
-                    {% if favourite.id == content.id %}
-
-                    {% endif %}
-                {% endfor %}
             {% endfor %}
 
+            <button type="submit">Save as favourite</button>
         </form>
     {% endif %}
     <a href="{{ url('home') }}">Home</a>

@@ -5,19 +5,6 @@
 
     <p>Select the ingredients you want in your recipes</p>
 
-    {% if content.user_favourite %}
-    <div class="pull-right">
-        <h2>Favourites</h2>
-        <ul>
-            {% for user in content.user_favourite %}
-                {% for recipe in user.favourite %}
-                    <li><a href="{{ recipe.url }}">{{ recipe.name }}</a></li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
     <form action="{{ url('recipe-list') }}" method="get">
     <h2>Ingredient List</h2>
 

@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import generics
 from rest_framework import renderers
 from recipe_site.models.recipe import Recipe
@@ -19,14 +20,18 @@ class RecipeList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Recipe.objects.all()
-        ingredient = self.request.query_params.get('ingredient', None)
-        restriction = self.request.query_params.get('restriction', None)
+        ingredient_list = self.request.GET.getlist('ingredient')
+        restriction_list = self.request.GET.getlist('restriction')
+        print(ingredient_list)
+        print(restriction_list)
 
-        if ingredient is not None and restriction is not None:
-            queryset = queryset.filter(ingredients__name=ingredient, dietary_category__name=restriction)
-        elif ingredient is not None:
-            queryset = queryset.filter(ingredients__name=ingredient)
-        elif restriction is not None:
-            queryset = queryset.filter(dietary_category__name__icontains=restriction)
+        if ingredient_list:
+            for ingredient in ingredient_list:
+                queryset = queryset.filter(ingredients__name=ingredient)
+
+        if restriction_list is not None:
+            for restriction in restriction_list:
+                restriction = restriction.split('_')
+                queryset = queryset.filter(Q(dietary_category__name__icontains=restriction[0]), Q(dietary_category__name__icontains=restriction[1]))
 
         return queryset

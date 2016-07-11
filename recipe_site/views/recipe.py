@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from rest_framework import generics
 from rest_framework import renderers
 from rest_framework.reverse import reverse
+from rest_framework.response import Response
 from recipe_site.models.recipe import Recipe
 from recipe_site.models.user_profile import UserProfile
 from recipe_site.renderers.html_renderer import HTMLRenderer
@@ -32,7 +33,10 @@ class RecipeDetail(generics.RetrieveAPIView):
             except IntegrityError:
                 return HttpResponseRedirect(reverse("home"))
 
-            return HttpResponseRedirect(reverse("home"))
+            if isinstance(request.accepted_renderer, HTMLRenderer):
+                return HttpResponseRedirect("/")
+            else:
+                return Response({'Success': 'Success'})
 
         return HttpResponseRedirect(current_url)
 

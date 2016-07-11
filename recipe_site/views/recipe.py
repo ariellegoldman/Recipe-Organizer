@@ -31,7 +31,8 @@ class RecipeList(generics.ListCreateAPIView):
 
         if restriction_list is not None:
             for restriction in restriction_list:
-                restriction = restriction.split('_')
+                if "_" in restriction:
+                    restriction = restriction.split('_')
                 queryset = queryset.filter(Q(dietary_category__name__icontains=restriction[0]), Q(dietary_category__name__icontains=restriction[1]))
 
         return queryset

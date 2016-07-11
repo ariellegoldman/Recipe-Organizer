@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^ingredients/(?P<pk>[0-9]+)/$', IngredientDetail.as_view(), name="ingredient-detail"),
     url(r'^dietary-categories/(?P<pk>[0-9]+)/$', DietaryCategoryDetail.as_view(), name="dietarycategory-detail"),
     url(r'^recipe/(?P<pk>[0-9]+)/$', RecipeDetail.as_view(), name="recipe-detail"),
-    url(r'^recipes/', RecipeList.as_view(), name="recipe-list"),
+    url(r'^recipes/$', RecipeList.as_view(), name="recipe-list"),
     url(r'^login/$', SessionAuth.as_view(), name="login"),
     url(r'^logout/$', SessionClose.as_view(), name="logout"),
 ]

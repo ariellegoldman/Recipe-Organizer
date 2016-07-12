@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from rest_framework import status
 from rest_framework import generics
 from rest_framework import renderers
+from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from recipe_site.models.recipe import Recipe
 from recipe_site.models.user_profile import UserProfile
@@ -25,7 +26,7 @@ class RecipeDetail(generics.RetrieveAPIView):
 
             #check if it's already a favourite
             if user_favourite.favourite.filter(id=favourite).exists():
-                return Response("Recipe is already a favourite", status=status.HTTP_409_CONFLICT)
+                return HttpResponseRedirect(reverse('recipe-detail', kwargs={'pk': favourite}))
 
             user_favourite.favourite.add(favourite)
 

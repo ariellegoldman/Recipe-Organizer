@@ -1,9 +1,8 @@
 from django.db.models import Q
-from django.db import IntegrityError
 from django.http import HttpResponseRedirect
+from rest_framework import status
 from rest_framework import generics
 from rest_framework import renderers
-from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from recipe_site.models.recipe import Recipe
 from recipe_site.models.user_profile import UserProfile
@@ -18,20 +17,18 @@ class RecipeDetail(generics.RetrieveAPIView):
     renderer_classes = (HTMLRenderer, renderers.JSONRenderer)
 
     def post(self, request, *args, **kwargs):
-
         favourite = request.POST['favourite']
         profile_id = request.POST['current_user']
         current_url = request.POST['from']
         if favourite:
-            print(favourite)
             user_favourite = UserProfile.objects.get(id=profile_id)
-            print(user_favourite.favourite.all())
 
             #check if it's already a favourite
-            try:
-                user_favourite.favourite.add(favourite)
-            except IntegrityError:
-                return HttpResponseRedirect(reverse("home"))
+            for key in user_favourite.favourite.all():
+                if str(key.id) == str(favourite):
+                    return Response({"Recipe is already a favourite"}, status=status.HTTP_409_CONFLICT)
+
+            user_favourite.favourite.add(favourite)
 
             if isinstance(request.accepted_renderer, HTMLRenderer):
                 return HttpResponseRedirect("/")

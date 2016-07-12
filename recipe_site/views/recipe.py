@@ -24,9 +24,8 @@ class RecipeDetail(generics.RetrieveAPIView):
             user_favourite = UserProfile.objects.get(id=profile_id)
 
             #check if it's already a favourite
-            for key in user_favourite.favourite.all():
-                if str(key.id) == str(favourite):
-                    return Response({"Recipe is already a favourite"}, status=status.HTTP_409_CONFLICT)
+            if user_favourite.favourite.filter(id=favourite).exists():
+                return Response("Recipe is already a favourite", status=status.HTTP_409_CONFLICT)
 
             user_favourite.favourite.add(favourite)
 

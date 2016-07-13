@@ -2,35 +2,39 @@
 
 {% block body %}
 
-    <h1>{{ content.name }}</h1>
-    <h2>Ingredients</h2>
+    {% if content.success == False %}
+        <h4>{{ content.message }}</h4>
+    {% else %}
+        <h1>{{ content.name }}</h1>
+        <h2>Ingredients</h2>
+            <ul>
+            {% for ingredient in content.ingredients %}
+                <li>{{ ingredient.name }}</li>
+            {% endfor %}
+            </ul>
+        <h2>Directions</h2>
+        {{ content.directions }}
+        <h3> Dietary Categories</h3>
         <ul>
-        {% for ingredient in content.ingredients %}
-            <li>{{ ingredient.name }}</li>
+        {% for restriction in content.dietary_category %}
+            <li>{{ restriction.name }}</li>
         {% endfor %}
         </ul>
-    <h2>Directions</h2>
-    {{ content.directions }}
-    <h3> Dietary Categories</h3>
-    <ul>
-    {% for restriction in content.dietary_category %}
-        <li>{{ restriction.name }}</li>
-    {% endfor %}
-    </ul>
 
-    {% if user.is_authenticated() %}
-        <form action=" " method="post">{% csrf_token %}
+        {% if user.is_authenticated() %}
+            <form action=" " method="post">{% csrf_token %}
 
-            <input id="from" name="from" value="{{ request.path|urlencode }}" type="hidden" readonly>
+                <input id="from" name="from" value="{{ request.path|urlencode }}" type="hidden" readonly>
 
-            <input type="hidden" name="favourite" value="{{ content.id }}">
+                <input type="hidden" name="favourite" value="{{ content.id }}">
 
-            {% for user in users %}
-                   <input id="current_user" name="current_user" value="{{ user.id }}" type="hidden">
-            {% endfor %}
+                {% for user in users %}
+                       <input id="current_user" name="current_user" value="{{ user.id }}" type="hidden">
+                {% endfor %}
 
-            <button type="submit">Save as favourite</button>
-        </form>
+                <button type="submit">Save as favourite</button>
+            </form>
+        {% endif %}
     {% endif %}
     <a href="{{ url('home') }}">Home</a>
 {% endblock %}

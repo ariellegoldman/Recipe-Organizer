@@ -16,24 +16,6 @@
   li {
     margin-bottom: 0;
   }
-  .navbar-brand {
-    z-index: 10;
-    padding-right: 1rem;
-    height: 40px;
-    overflow: visible;
-    li {
-      margin-right: 1em;
-      a {
-        margin: 0;
-        padding: 0;
-        padding-left: 0.5rem;
-        &:hover, &:focus {
-          background: none;
-          color: unset;
-        }
-      }
-    }
-  }
 
   .navbar-list {
     list-style: none;
@@ -59,25 +41,9 @@
       }
     }
 
-      .navbar-highlight {
-        background: $diamm-red;
-        a {
-          color: #fff;
-          &:hover, &:focus {
-            background: $diamm-black;
-          }
-        }
-      }
-    }
   }
+}
 
-  nav.center-block.text-center {
-    ul {
-      li {
-        display: inline;
-      }
-    }
-  }
 
 
 
